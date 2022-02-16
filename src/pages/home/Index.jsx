@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { HomeContainer, CardContainer, HomeCard } from './Style';
 
 const Home = () => {
   const [btc, setBtc] = useState('');
@@ -11,13 +12,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <HomeContainer>
       <div>
         <button type="button" onClick={ () => navigate('/update-quote') }>
           Atualizar valor monetário
         </button>
       </div>
-      <div>
+      <HomeCard>
         <label htmlFor="btc">BTC</label>
         <input
           type="text"
@@ -26,52 +27,54 @@ const Home = () => {
           value={ btc }
           onChange={ (e) => setBtc(e.target.value) }
         />
-      </div>
+      </HomeCard>
 
-      <div>
-        <label htmlFor="usd">USD</label>
-        <input
-          type="text"
-          name="usd"
-          id="usd"
-          value={ usd }
-          onChange={ (e) => setUsd(e.target.value) }
-        />
-      </div>
+      <CardContainer>
+        <HomeCard>
+          <label htmlFor="usd">USD</label>
+          <input
+            type="text"
+            name="usd"
+            id="usd"
+            value={ usd }
+            onChange={ (e) => setUsd(e.target.value) }
+          />
+        </HomeCard>
 
-      <div>
-        <label htmlFor="brl">BRL</label>
-        <input
-          type="text"
-          name="brl"
-          id="brl"
-          value={ brl }
-          onChange={ (e) => setBrl(e.target.value) }
-        />
-      </div>
+        <HomeCard>
+          <label htmlFor="brl">BRL</label>
+          <input
+            type="text"
+            name="brl"
+            id="brl"
+            value={ brl }
+            onChange={ (e) => setBrl(e.target.value) }
+          />
+        </HomeCard>
 
-      <div>
-        <label htmlFor="eur">EUR</label>
-        <input
-          type="text"
-          name="eur"
-          id="eur"
-          value={ eur }
-          onChange={ (e) => setEur(e.target.value) }
-        />
-      </div>
+        <HomeCard>
+          <label htmlFor="eur">EUR</label>
+          <input
+            type="text"
+            name="eur"
+            id="eur"
+            value={ eur }
+            onChange={ (e) => setEur(e.target.value) }
+          />
+        </HomeCard>
 
-      <div>
-        <label htmlFor="cad">CAD</label>
-        <input
-          type="text"
-          name="cad"
-          id="cad"
-          value={ cad }
-          onChange={ (e) => setCad(e.target.value) }
-        />
-      </div>
-    </div>
+        <HomeCard>
+          <label htmlFor="cad">CAD</label>
+          <input
+            type="text"
+            name="cad"
+            id="cad"
+            value={ cad }
+            onChange={ (e) => setCad(e.target.value) }
+          />
+        </HomeCard>
+      </CardContainer>
+    </HomeContainer>
   );
 };
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { FormContainer, Wrapper } from './Style';
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [passwrod, setPassword] = useState('');
@@ -19,29 +21,31 @@ const Login = () => {
   };
 
   return (
-    <form>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          value={ email }
-          onChange={ (e) => setEmail(e.target.value) }
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Senha</label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          value={ passwrod }
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-      </div>
-      <button type="button" onClick={ (e) => sendLogin(e) }>Enviar</button>
-    </form>
+    <Wrapper>
+      <FormContainer>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            value={ email }
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Senha</label>
+          <input
+            type="text"
+            name="password"
+            id="password"
+            value={ passwrod }
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+        </div>
+        <button type="button" onClick={ (e) => sendLogin(e) }>Enviar</button>
+      </FormContainer>
+    </Wrapper>
   );
 };
 
