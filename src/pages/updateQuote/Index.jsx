@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Container, Content } from './Style';
 
 const UpdateQuote = () => {
   const [currencies, setCurrencies] = useState();
   const [newValue, setNewValue] = useState();
 
+  const navigate = useNavigate();
+
   return (
     <Container>
       <div>
-        <button type="button">Voltar</button>
+        <button type="button" onClick={ () => navigate('/') }>Voltar</button>
       </div>
 
       <Content>
