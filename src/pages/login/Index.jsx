@@ -12,6 +12,7 @@ const Login = () => {
 
     try {
       navigate('/home');
+      console.log('entrei');
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +40,7 @@ const Login = () => {
           onChange={ (e) => setPassword(e.target.value) }
         />
       </div>
-      <button type="button" onClick={ () => sendLogin }>Enviar</button>
+      <button type="button" onClick={ (e) => sendLogin(e) }>Enviar</button>
     </form>
   );
 };
