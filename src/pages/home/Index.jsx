@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import getQuotes from '../../services/app/Index';
+import { getQuotes } from '../../services/app/Index';
 
 import { HomeContainer, CardContainer, HomeCard } from './Style';
 
@@ -52,8 +52,15 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const appToken = Object.keys(localStorage)
+      .some((key) => key === 'crypto-index-api-token');
+
+    if (!appToken) {
+      navigate('/login');
+    }
+
     quotes();
-  }, []);
+  });
 
   return (
     <HomeContainer>
