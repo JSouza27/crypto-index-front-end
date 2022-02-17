@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import getQuotes from '../../services/app/Index';
+
 import { HomeContainer, CardContainer, HomeCard } from './Style';
 
 const Home = () => {
@@ -10,6 +12,48 @@ const Home = () => {
   const [cad, setCad] = useState('');
 
   const navigate = useNavigate();
+
+  const convertCurrency = (value) => {
+    const converted = parseFloat(value).toFixed(2);
+
+    return converted.toLocaleString('pt-br', { maximumSignificantDigits: 2 });
+  };
+
+  const calculate = (n) => {
+    const valueBrl = parseFloat(n) * parseFloat(brl).toFixed(2);
+    const valueCad = parseFloat(n) * parseFloat(cad).toFixed(2);
+    const valueEurl = parseFloat(n) * parseFloat(eur).toFixed(2);
+    const valueUsd = parseFloat(n) * parseFloat(usd).toFixed(2);
+
+    setBrl(convertCurrency(valueBrl));
+    setCad(convertCurrency(valueCad));
+    setEur(convertCurrency(valueEurl));
+    setUsd(convertCurrency(valueUsd));
+  };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+
+    calculate(value);
+    setBtc(value);
+  };
+
+  const quotes = async () => {
+    const token = localStorage.getItem('crypto-index-api-token');
+    const localQuotes = await getQuotes(token);
+
+    const { BRL, BTC, CAD, EUR, USD } = localQuotes.bpi;
+
+    setBrl(convertCurrency(BRL.rate_float));
+    setBtc(convertCurrency(BTC.rate_float));
+    setCad(convertCurrency(CAD.rate_float));
+    setEur(convertCurrency(EUR.rate_float));
+    setUsd(convertCurrency(USD.rate_float));
+  };
+
+  useEffect(() => {
+    quotes();
+  }, []);
 
   return (
     <HomeContainer>
@@ -25,53 +69,29 @@ const Home = () => {
           name="btc"
           id="btc"
           value={ btc }
-          onChange={ (e) => setBtc(e.target.value) }
+          onChange={ (e) => handleChange(e) }
         />
       </HomeCard>
 
       <CardContainer>
         <HomeCard>
-          <label htmlFor="usd">USD</label>
-          <input
-            type="text"
-            name="usd"
-            id="usd"
-            value={ usd }
-            onChange={ (e) => setUsd(e.target.value) }
-          />
+          <span>USD</span>
+          <span>{ usd }</span>
         </HomeCard>
 
         <HomeCard>
-          <label htmlFor="brl">BRL</label>
-          <input
-            type="text"
-            name="brl"
-            id="brl"
-            value={ brl }
-            onChange={ (e) => setBrl(e.target.value) }
-          />
+          <span>BRL</span>
+          <span>{ brl }</span>
         </HomeCard>
 
         <HomeCard>
-          <label htmlFor="eur">EUR</label>
-          <input
-            type="text"
-            name="eur"
-            id="eur"
-            value={ eur }
-            onChange={ (e) => setEur(e.target.value) }
-          />
+          <span>EUR</span>
+          <span>{ eur }</span>
         </HomeCard>
 
         <HomeCard>
-          <label htmlFor="cad">CAD</label>
-          <input
-            type="text"
-            name="cad"
-            id="cad"
-            value={ cad }
-            onChange={ (e) => setCad(e.target.value) }
-          />
+          <span>CAD</span>
+          <span>{ cad }</span>
         </HomeCard>
       </CardContainer>
     </HomeContainer>

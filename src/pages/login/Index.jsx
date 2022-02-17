@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import getLogin from '../../services/login/Index';
 
 import { FormContainer, Wrapper } from './Style';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
-  const [passwrod, setPassword] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
-  const sendLogin = (e) => {
+  const sendLogin = async (e) => {
     e.preventDefault();
 
     try {
-      navigate('/home');
-      console.log('entrei');
+      const response = await getLogin({ email, password });
+
+      localStorage.setItem('crypto-index-api-token', response.token);
+      toast.success('Usuário logado com sucesso');
+
+      navigate('/');
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -39,7 +46,7 @@ const Login = () => {
             type="text"
             name="password"
             id="password"
-            value={ passwrod }
+            value={ password }
             onChange={ (e) => setPassword(e.target.value) }
           />
         </div>

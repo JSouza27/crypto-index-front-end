@@ -7,8 +7,8 @@ import UpdateQuote from '../pages/updateQuote/Index';
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/" element={ <Login /> } />
-    <Route exact path="/home" element={ <Home /> } />
+    <Route exact path="/login" element={ <Login /> } />
+    <Route exact path="/" element={ <Home /> } />
     <Route exact path="/update-quote" element={ <UpdateQuote /> } />
     <Route exact path="*" element={ <h1>Not Found</h1> } />
   </Switch>
