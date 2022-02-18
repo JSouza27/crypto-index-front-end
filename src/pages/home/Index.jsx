@@ -5,6 +5,8 @@ import { getQuotes } from '../../services/app/Index';
 import { HomeContainer, CardContainer, HomeCard, HomeContent } from './Style';
 
 const Home = () => {
+  const [baseValue, setBaseValue] = useState({});
+
   const [btc, setBtc] = useState('');
   const [brl, setBrl] = useState('');
   const [usd, setUsd] = useState('');
@@ -20,10 +22,10 @@ const Home = () => {
   };
 
   const calculate = (n) => {
-    const valueBrl = parseFloat(n) * parseFloat(brl);
-    const valueCad = parseFloat(n) * parseFloat(cad);
-    const valueEurl = parseFloat(n) * parseFloat(eur);
-    const valueUsd = parseFloat(n) * parseFloat(usd);
+    const valueBrl = parseFloat(n) * parseFloat(baseValue.BRL);
+    const valueCad = parseFloat(n) * parseFloat(baseValue.CAD);
+    const valueEurl = parseFloat(n) * parseFloat(baseValue.EUR);
+    const valueUsd = parseFloat(n) * parseFloat(baseValue.USD);
 
     setBrl(convertCurrency(valueBrl));
     setCad(convertCurrency(valueCad));
@@ -33,22 +35,9 @@ const Home = () => {
 
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log(value);
+
     calculate(value);
     setBtc(value);
-  };
-
-  const quotes = async () => {
-    const token = localStorage.getItem('crypto-index-api-token');
-    const localQuotes = await getQuotes(token);
-
-    const { BRL, BTC, CAD, EUR, USD } = localQuotes.bpi;
-
-    setBrl(convertCurrency(BRL.rate_float));
-    setBtc(convertCurrency(BTC.rate_float));
-    setCad(convertCurrency(CAD.rate_float));
-    setEur(convertCurrency(EUR.rate_float));
-    setUsd(convertCurrency(USD.rate_float));
   };
 
   useEffect(() => {
@@ -59,8 +48,31 @@ const Home = () => {
       navigate('/login');
     }
 
+    const quotes = async () => {
+      const token = localStorage.getItem('crypto-index-api-token');
+      const localQuotes = await getQuotes(token);
+
+      const { BRL, BTC, CAD, EUR, USD } = localQuotes.bpi;
+
+      const currencies = {
+        BRL: convertCurrency(BRL.rate_float),
+        BTC: convertCurrency(BTC.rate_float),
+        CAD: convertCurrency(CAD.rate_float),
+        EUR: convertCurrency(EUR.rate_float),
+        USD: convertCurrency(USD.rate_float),
+      };
+
+      setBrl(currencies.BRL);
+      setBtc(currencies.BTC);
+      setCad(currencies.CAD);
+      setEur(currencies.EUR);
+      setUsd(currencies.USD);
+
+      setBaseValue(currencies);
+    };
+
     quotes();
-  });
+  }, [navigate]);
 
   return (
     <HomeContainer>
@@ -73,7 +85,7 @@ const Home = () => {
         <HomeCard>
           <span>BTC</span>
           <input
-            type="text"
+            type="number"
             name="btc"
             id="btc"
             value={ btc }

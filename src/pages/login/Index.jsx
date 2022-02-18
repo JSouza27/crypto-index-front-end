@@ -5,13 +5,10 @@ import getLogin from '../../services/login/Index';
 
 import { FormContainer, Wrapper } from './Style';
 import 'react-toastify/dist/ReactToastify.css';
-import useToken from '../../hooks/useToken';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const { addToken } = useToken();
 
   const navigate = useNavigate();
 
@@ -21,7 +18,7 @@ const Login = () => {
     try {
       const response = await getLogin({ email, password });
 
-      addToken(response.token);
+      localStorage.setItem('crypto-index-api-token', response.token);
       toast.success('Usuário logado com sucesso');
 
       navigate('/');

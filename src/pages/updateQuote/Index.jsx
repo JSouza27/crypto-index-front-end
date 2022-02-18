@@ -40,29 +40,6 @@ const UpdateQuote = () => {
     setSelectedCurrency(selected);
   };
 
-  const currencies = async () => {
-    const getToken = localStorage.getItem('crypto-index-api-token');
-    const localCurrencies = await getCurrencies(token);
-
-    const keys = Object.keys(localCurrencies);
-
-    const convertedCurrencies = keys.reduce((acc, cur) => {
-      const obj = {
-        currency: cur,
-        value: parseFloat(localCurrencies[cur]).toFixed(2),
-      };
-
-      acc.push(obj);
-
-      return acc;
-    }, []);
-
-    setOptions(convertedCurrencies);
-    setSelectedOptions(convertedCurrencies[0].currency);
-    setSelectedCurrency(convertedCurrencies[0]);
-    setToken(getToken);
-  };
-
   useEffect(() => {
     const appToken = Object.keys(localStorage)
       .some((key) => key === 'crypto-index-api-token');
@@ -71,8 +48,31 @@ const UpdateQuote = () => {
       navigate('/login');
     }
 
+    const currencies = async () => {
+      const getToken = localStorage.getItem('crypto-index-api-token');
+      const localCurrencies = await getCurrencies(token);
+
+      const keys = Object.keys(localCurrencies);
+
+      const convertedCurrencies = keys.reduce((acc, cur) => {
+        const obj = {
+          currency: cur,
+          value: parseFloat(localCurrencies[cur]).toFixed(2),
+        };
+
+        acc.push(obj);
+
+        return acc;
+      }, []);
+
+      setOptions(convertedCurrencies);
+      setSelectedOptions(convertedCurrencies[0].currency);
+      setSelectedCurrency(convertedCurrencies[0]);
+      setToken(getToken);
+    };
+
     currencies();
-  });
+  }, [navigate]);
 
   return (
     <Container>
