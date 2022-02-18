@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   background-color: #E9FCE9;
   color: #4D625F;
   display: flex;
+  flex-direction: column;
   font-size: 1.12rem;
   font-weight: normal;
   justify-content: center;
@@ -12,10 +13,18 @@ const Wrapper = styled.div`
   width: 100vw;
 `;
 
+const LogoContainer = styled.div`
+  width: 12rem;
+
+  & > img {
+    width: 100%;
+  }
+`;
+
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   height: 26.62rem;
   margin: 1rem;
   width: 21.56rem;
@@ -57,4 +66,5 @@ const FormContainer = styled.form`
 export {
   Wrapper,
   FormContainer,
+  LogoContainer,
 };

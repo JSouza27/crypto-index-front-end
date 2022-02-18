@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import getLogin from '../../services/login/Index';
+import logoPng from '../../assets/logo.png';
 
-import { FormContainer, Wrapper } from './Style';
+import { FormContainer, LogoContainer, Wrapper } from './Style';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
@@ -29,6 +30,9 @@ const Login = () => {
 
   return (
     <Wrapper>
+      <LogoContainer>
+        <img src={ logoPng } alt="logo" />
+      </LogoContainer>
       <FormContainer>
         <div>
           <label htmlFor="email">Email</label>
