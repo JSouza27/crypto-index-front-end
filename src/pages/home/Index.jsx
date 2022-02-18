@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getQuotes } from '../../services/app/Index';
 
-import { HomeContainer, CardContainer, HomeCard } from './Style';
+import { HomeContainer, CardContainer, HomeCard, HomeContent } from './Style';
 
 const Home = () => {
   const [btc, setBtc] = useState('');
@@ -20,10 +20,10 @@ const Home = () => {
   };
 
   const calculate = (n) => {
-    const valueBrl = parseFloat(n) * parseFloat(brl).toFixed(2);
-    const valueCad = parseFloat(n) * parseFloat(cad).toFixed(2);
-    const valueEurl = parseFloat(n) * parseFloat(eur).toFixed(2);
-    const valueUsd = parseFloat(n) * parseFloat(usd).toFixed(2);
+    const valueBrl = parseFloat(n) * parseFloat(brl);
+    const valueCad = parseFloat(n) * parseFloat(cad);
+    const valueEurl = parseFloat(n) * parseFloat(eur);
+    const valueUsd = parseFloat(n) * parseFloat(usd);
 
     setBrl(convertCurrency(valueBrl));
     setCad(convertCurrency(valueCad));
@@ -33,7 +33,7 @@ const Home = () => {
 
   const handleChange = (e) => {
     const { value } = e.target;
-
+    console.log(value);
     calculate(value);
     setBtc(value);
   };
@@ -64,43 +64,45 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <div>
-        <button type="button" onClick={ () => navigate('/update-quote') }>
-          Atualizar valor monetário
-        </button>
-      </div>
-      <HomeCard>
-        <label htmlFor="btc">BTC</label>
-        <input
-          type="text"
-          name="btc"
-          id="btc"
-          value={ btc }
-          onChange={ (e) => handleChange(e) }
-        />
-      </HomeCard>
-
-      <CardContainer>
+      <HomeContent>
+        <div>
+          <button type="button" onClick={ () => navigate('/update-quote') }>
+            Atualizar valor monetário
+          </button>
+        </div>
         <HomeCard>
-          <span>USD</span>
-          <span>{ usd }</span>
+          <span>BTC</span>
+          <input
+            type="text"
+            name="btc"
+            id="btc"
+            value={ btc }
+            onChange={ (e) => handleChange(e) }
+          />
         </HomeCard>
 
-        <HomeCard>
-          <span>BRL</span>
-          <span>{ brl }</span>
-        </HomeCard>
+        <CardContainer>
+          <HomeCard>
+            <span>USD</span>
+            <span>{ usd }</span>
+          </HomeCard>
 
-        <HomeCard>
-          <span>EUR</span>
-          <span>{ eur }</span>
-        </HomeCard>
+          <HomeCard>
+            <span>BRL</span>
+            <span>{ brl }</span>
+          </HomeCard>
 
-        <HomeCard>
-          <span>CAD</span>
-          <span>{ cad }</span>
-        </HomeCard>
-      </CardContainer>
+          <HomeCard>
+            <span>EUR</span>
+            <span>{ eur }</span>
+          </HomeCard>
+
+          <HomeCard>
+            <span>CAD</span>
+            <span>{ cad }</span>
+          </HomeCard>
+        </CardContainer>
+      </HomeContent>
     </HomeContainer>
   );
 };
