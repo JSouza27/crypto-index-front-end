@@ -35,6 +35,7 @@
         "treegrid"
       ],
       "depth": 3
-    }]
+    }],
+    "react/jsx-max-depth": [2, { "max": 6 }]
   }
 }

@@ -53,6 +53,28 @@ const HomeCard = styled.div`
   margin: 0.5rem;
   width: 13.43rem;
 
+  & > div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    & > span {
+      margin-left: 1rem;
+    }
+
+    & > span:nth-child(3) {
+      background-color: #C6C6C6;
+      border-radius: 0.25rem;
+      font-size: 0.62rem;
+      font-family: 600;
+      padding: 0.2rem 0;
+      text-align: center;
+      vertical-align: middle;
+      width: 3.3rem;
+    }
+  }
+
   & > span:nth-child(2) {
     color: #000;
     font-size: 1.5rem;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaBitcoin } from 'react-icons/fa';
 import { getQuotes } from '../../services/app/Index';
 
 import { HomeContainer, CardContainer, HomeCard, HomeContent } from './Style';
@@ -83,7 +84,11 @@ const Home = () => {
           </button>
         </div>
         <HomeCard>
-          <span>BTC</span>
+          <div>
+            <FaBitcoin size={ 35 } color="#f7931a" />
+            <span>BTC</span>
+            <span>BITCOIN</span>
+          </div>
           <input
             type="number"
             name="btc"
@@ -95,7 +100,9 @@ const Home = () => {
 
         <CardContainer>
           <HomeCard>
-            <span>USD</span>
+            <div>
+              <span>USD</span>
+            </div>
             <span>{ usd }</span>
           </HomeCard>
 
