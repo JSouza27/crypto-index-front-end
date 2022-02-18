@@ -38,8 +38,15 @@ const Home = () => {
   const handleChange = (e) => {
     const { value } = e.target;
 
-    calculate(value);
-    setBtc(value);
+    if (value === '') {
+      calculate(1);
+      setBtc(1);
+    }
+
+    if (value !== '') {
+      calculate(value);
+      setBtc(value);
+    }
   };
 
   useEffect(() => {
@@ -95,6 +102,7 @@ const Home = () => {
             name="btc"
             id="btc"
             value={ btc }
+            min={ 1 }
             onChange={ (e) => handleChange(e) }
           />
         </HomeCard>
