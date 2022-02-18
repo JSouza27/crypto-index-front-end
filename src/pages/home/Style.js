@@ -68,10 +68,12 @@ const HomeCard = styled.div`
       border-radius: 0.25rem;
       font-size: 0.62rem;
       font-family: 600;
+      max-width: 3.8rem;
+      min-width: 3.3rem;
       padding: 0.2rem 0;
       text-align: center;
       vertical-align: middle;
-      width: 3.3rem;
+      width:100%;
     }
   }
 

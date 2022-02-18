@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaBitcoin } from 'react-icons/fa';
+import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { getQuotes } from '../../services/app/Index';
 
 import { HomeContainer, CardContainer, HomeCard, HomeContent } from './Style';
@@ -101,23 +102,37 @@ const Home = () => {
         <CardContainer>
           <HomeCard>
             <div>
+              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
               <span>USD</span>
+              <span>DOLLAR</span>
             </div>
             <span>{ usd }</span>
           </HomeCard>
 
           <HomeCard>
-            <span>BRL</span>
+            <div>
+              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
+              <span>BRL</span>
+              <span>REAL</span>
+            </div>
             <span>{ brl }</span>
           </HomeCard>
 
           <HomeCard>
-            <span>EUR</span>
+            <div>
+              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
+              <span>EUR</span>
+              <span>EURO</span>
+            </div>
             <span>{ eur }</span>
           </HomeCard>
 
           <HomeCard>
-            <span>CAD</span>
+            <div>
+              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
+              <span>CAD</span>
+              <span>DOLLAR CANADENSE</span>
+            </div>
             <span>{ cad }</span>
           </HomeCard>
         </CardContainer>
