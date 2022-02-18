@@ -46,7 +46,7 @@ const Login = () => {
         <div>
           <label htmlFor="password">Senha</label>
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             value={ password }
