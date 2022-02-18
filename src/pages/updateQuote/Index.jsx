@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getCurrencies, sendUpdate } from '../../services/app/Index';
 
-import { Container, Content } from './Style';
+import { Button, Container, Content } from './Style';
 import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateQuote = () => {
@@ -72,12 +72,12 @@ const UpdateQuote = () => {
     };
 
     currencies();
-  }, [navigate]);
+  }, [navigate, token]);
 
   return (
     <Container>
       <div>
-        <button type="button" onClick={ () => navigate('/') }>Voltar</button>
+        <Button type="button" onClick={ () => navigate('/') }>Voltar</Button>
       </div>
 
       <Content>
@@ -93,13 +93,13 @@ const UpdateQuote = () => {
         </div>
 
         <div>
-          <span>{`Valor atual: ${selectedCurrency.value}`}</span>
+          <span>{`Valor atual: R$ ${selectedCurrency.value}`}</span>
         </div>
 
         <div>
           <label htmlFor="newValue">Novo valor</label>
           <input
-            type="text"
+            type="number"
             name="newValue"
             id="newValue"
             value={ newValue }
@@ -108,7 +108,7 @@ const UpdateQuote = () => {
         </div>
 
         <div>
-          <button type="button" onClick={ (e) => updateValue(e) }>ATUALIZAR</button>
+          <Button type="button" onClick={ (e) => updateValue(e) }>ATUALIZAR</Button>
         </div>
       </Content>
     </Container>

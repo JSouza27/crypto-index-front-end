@@ -17,10 +17,10 @@ const HomeContent = styled.div`
   justify-content: center;
   
   & > div > button {
-    background-color: #5EDE99;
-    border: none;
+    background-color: #fff;
+    border: 1px solid #511281;
     border-radius: 0.25rem;
-    color: #fff;
+    color: #511281;
     font-size: 1.12rem;
     font-weight: 600;
     height: 2.62rem;

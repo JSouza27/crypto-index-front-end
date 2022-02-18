@@ -50,7 +50,7 @@ const Login = () => {
             onChange={ (e) => setPassword(e.target.value) }
           />
         </div>
-        <button type="button" onClick={ (e) => sendLogin(e) }>Enviar</button>
+        <button type="button" onClick={ (e) => sendLogin(e) }>ENTRAR</button>
       </FormContainer>
     </Wrapper>
   );
