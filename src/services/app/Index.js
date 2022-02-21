@@ -1,24 +1,28 @@
 import axios from 'axios';
 
-const url = process.env.REACT_APP_BASE_API;
+const api = process.env.REACT_APP_BASE_API;
 
 const getQuotes = async (token) => {
-  const headers = { headers: { authorization: token } };
-  const response = await axios.get(`${url}/crypto/btc`, headers);
+  try {
+    const headers = { headers: { authorization: token } };
+    const response = await axios.get(`${api}/crypto/btc`, headers);
 
-  return response.data;
+    return response;
+  } catch (error) {
+    console.log(error.response);
+  }
 };
 
 const getCurrencies = async (token) => {
   const headers = { headers: { authorization: token } };
-  const response = await axios.get(`${url}/currencies`, headers);
+  const response = await axios.get(`${api}/currencies`, headers);
 
   return response.data;
 };
 
 const sendUpdate = async (token, quote) => {
   axios.defaults.headers.authorization = token;
-  const response = await axios.post(`${url}/crypto/btc`, quote);
+  const response = await axios.post(`${api}/crypto/btc`, quote);
 
   return response;
 };

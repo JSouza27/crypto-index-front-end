@@ -1,6 +1,7 @@
 {
   "root": true,
-  "extends": ["trybe-frontend"],
+  "plugins": ["jest-dom"],
+  "extends": ["trybe-frontend", "plugin:jest-dom/recommended"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
@@ -36,6 +37,10 @@
       ],
       "depth": 3
     }],
-    "react/jsx-max-depth": [2, { "max": 6 }]
+    "react/jsx-max-depth": [2, { "max": 6 }],
+    "jest-dom/prefer-checked": "error",
+    "jest-dom/prefer-enabled-disabled": "error",
+    "jest-dom/prefer-required": "error",
+    "jest-dom/prefer-to-have-attribute": "error"
   }
 }

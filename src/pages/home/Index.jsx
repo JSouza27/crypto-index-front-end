@@ -7,7 +7,13 @@ import { getQuotes } from '../../services/app/Index';
 import { HomeContainer, CardContainer, HomeCard, HomeContent } from './Style';
 
 const Home = () => {
-  const [baseValue, setBaseValue] = useState({});
+  const [baseValue, setBaseValue] = useState({
+    BRL: parseFloat(0),
+    BTC: parseFloat(0),
+    CAD: parseFloat(0),
+    EUR: parseFloat(0),
+    USD: parseFloat(0),
+  });
 
   const [btc, setBtc] = useState('');
   const [brl, setBrl] = useState('');
@@ -61,7 +67,7 @@ const Home = () => {
       const token = localStorage.getItem('crypto-index-api-token');
       const localQuotes = await getQuotes(token);
 
-      const { BRL, BTC, CAD, EUR, USD } = localQuotes.bpi;
+      const { BRL, BTC, CAD, EUR, USD } = localQuotes.data.bpi;
 
       const currencies = {
         BRL: convertCurrency(BRL.rate_float),

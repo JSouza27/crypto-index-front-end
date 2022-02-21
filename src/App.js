@@ -1,6 +1,7 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import GlobalStyle from './GlobalStyle';
+import LocationDisplay from './helpers/LocationDisplay';
 import Routes from './routes/Routes';
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
       draggable
       pauseOnHover
     />
+    <LocationDisplay />
   </div>
 );
 

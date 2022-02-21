@@ -15,16 +15,16 @@ const Login = () => {
 
   const sendLogin = async (e) => {
     e.preventDefault();
+    const STATUS_CODE_OK = 200;
 
-    try {
-      const response = await getLogin({ email, password });
-
-      localStorage.setItem('crypto-index-api-token', response.token);
+    const { status, data } = await getLogin({ email, password });
+    console.log({ status, data });
+    if (status !== STATUS_CODE_OK) {
+      toast.error(data.message);
+    } else {
+      localStorage.setItem('crypto-index-api-token', data.token);
       toast.success('Usuário logado com sucesso');
-
       navigate('/');
-    } catch (err) {
-      toast.error(err.response.data.message);
     }
   };
 
@@ -37,7 +37,8 @@ const Login = () => {
         <div>
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            data-testid="email-input"
+            type="email"
             name="email"
             id="email"
             value={ email }
@@ -47,6 +48,7 @@ const Login = () => {
         <div>
           <label htmlFor="password">Senha</label>
           <input
+            data-testid="password-input"
             type="password"
             name="password"
             id="password"
