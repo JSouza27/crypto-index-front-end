@@ -71,7 +71,10 @@ describe('Testando página de login', () => {
     it('Retorna um erro quando usuário passa o email ou senha inválido',
       async () => {
         const response = {
-          message: 'Campos inválidos',
+          data: {
+            message: 'Campos inválidos',
+          },
+          status: 400,
         };
 
         axios.post.mockReturnValue(response);
@@ -87,7 +90,6 @@ describe('Testando página de login', () => {
         useEvent.click(sendButton);
 
         expect(axios.post).toHaveBeenCalled();
-        expect(axios.post).toHaveReturnedWith(response);
       });
 
     it('Redirenciona para a página Home quando é passado email e senha correta',
