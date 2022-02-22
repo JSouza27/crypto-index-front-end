@@ -16,20 +16,26 @@ const UpdateQuote = () => {
 
   const navigate = useNavigate();
 
+  const goHome = (e, route) => {
+    e.preventDefault();
+    return navigate(route);
+  };
+
   const updateValue = async (e) => {
     e.preventDefault();
 
+    const STATUS_CODE_OK = 200;
     const newQuote = selectedCurrency;
     newQuote.value = parseFloat(newValue);
 
-    try {
-      const response = await sendUpdate(token, newQuote);
+    const { data, status } = await sendUpdate(token, newQuote);
 
-      toast.success(response.data.message);
-      navigate('/');
-    } catch (err) {
-      toast.error(err.response.data.message);
+    if (status !== STATUS_CODE_OK) {
+      return toast.error(data.message);
     }
+
+    toast.success(data.message);
+    goHome(e, '/');
   };
 
   const handleChange = (e) => {
@@ -77,40 +83,51 @@ const UpdateQuote = () => {
   return (
     <Container>
       <div>
-        <Button type="button" onClick={ () => navigate('/') }>Voltar</Button>
+        <Button type="button" onClick={ (e) => goHome(e, '/') }>Voltar</Button>
       </div>
 
-      <Content>
-        <div>
-          <label htmlFor="currency">Moeda</label>
-          <select value={ selectedOptions } onChange={ (e) => handleChange(e) }>
-            {
-              options.map(({ currency }) => (
-                <option key={ currency } value={ currency }>{ currency }</option>
-              ))
-            }
-          </select>
-        </div>
+      {
+        Object.keys(selectedCurrency).length
+          ? (
+            <Content>
+              <div>
+                <label htmlFor="currency">Moeda</label>
+                <select
+                  id="currency"
+                  value={ selectedOptions }
+                  onChange={ (e) => handleChange(e) }
+                >
+                  {
+                    options.map(({ currency }) => (
+                      <option key={ currency } value={ currency }>{ currency }</option>
+                    ))
+                  }
+                </select>
+              </div>
 
-        <div>
-          <span>{`Valor atual: R$ ${selectedCurrency.value}`}</span>
-        </div>
+              <div>
+                <span>{`Valor atual: R$ ${selectedCurrency.value}`}</span>
+              </div>
 
-        <div>
-          <label htmlFor="newValue">Novo valor</label>
-          <input
-            type="number"
-            name="newValue"
-            id="newValue"
-            value={ newValue }
-            onChange={ (e) => setNewValue(e.target.value) }
-          />
-        </div>
+              <div>
+                <label htmlFor="newValue">Novo valor</label>
+                <input
+                  data-testid="input-newValue"
+                  type="number"
+                  name="newValue"
+                  id="newValue"
+                  value={ newValue }
+                  onChange={ (e) => setNewValue(e.target.value) }
+                />
+              </div>
 
-        <div>
-          <Button type="button" onClick={ (e) => updateValue(e) }>ATUALIZAR</Button>
-        </div>
-      </Content>
+              <div>
+                <Button type="button" onClick={ (e) => updateValue(e) }>ATUALIZAR</Button>
+              </div>
+            </Content>
+          ) : <div>Loading...</div>
+      }
+
     </Container>
   );
 };

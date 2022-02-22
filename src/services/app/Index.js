@@ -9,7 +9,7 @@ const getQuotes = async (token) => {
 
     return response;
   } catch (error) {
-    console.log({ quotes: error.response });
+    return error.response;
   }
 };
 
@@ -20,15 +20,19 @@ const getCurrencies = async (token) => {
 
     return response;
   } catch (error) {
-    console.log({ currencies: error.response });
+    return error.response;
   }
 };
 
 const sendUpdate = async (token, quote) => {
-  axios.defaults.headers.authorization = token;
-  const response = await axios.post(`${api}/crypto/btc`, quote);
+  try {
+    axios.defaults.headers.authorization = token;
+    const response = await axios.post(`${api}/crypto/btc`, quote);
 
-  return response;
+    return response;
+  } catch (error) {
+    return error.response;
+  }
 };
 
 export {
