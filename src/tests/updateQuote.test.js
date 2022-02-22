@@ -5,6 +5,7 @@ import axios from 'axios';
 import App from '../App';
 import renderWithRouter from '../helpers/renderWithRouter';
 import currencies from '../helpers/bpi.json';
+import 'jest-canvas-mock';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -41,7 +42,7 @@ const mockErrorUpdate = {
 };
 
 const STORAGE_KEY = 'crypto-index-api-token';
-const LOADING = 'Loading...';
+const LOADING = /loading/i;
 
 const route = '/update-quote';
 const inputId = 'input-newValue';

@@ -5,6 +5,7 @@ import { getCurrencies, sendUpdate } from '../../services/app/Index';
 
 import { Button, Container, Content } from './Style';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../../components/Loading';
 
 const UpdateQuote = () => {
   const [options, setOptions] = useState([]);
@@ -47,6 +48,7 @@ const UpdateQuote = () => {
   };
 
   useEffect(() => {
+    const TIME = 1000;
     const appToken = Object.keys(localStorage)
       .some((key) => key === 'crypto-index-api-token');
 
@@ -77,7 +79,7 @@ const UpdateQuote = () => {
       setToken(getToken);
     };
 
-    currencies();
+    setTimeout(() => currencies(), TIME);
   }, [navigate, token]);
 
   return (
@@ -125,7 +127,7 @@ const UpdateQuote = () => {
                 <Button type="button" onClick={ (e) => updateValue(e) }>ATUALIZAR</Button>
               </div>
             </Content>
-          ) : <div>Loading...</div>
+          ) : <Loading />
       }
 
     </Container>

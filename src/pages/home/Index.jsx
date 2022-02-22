@@ -5,6 +5,7 @@ import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { getQuotes } from '../../services/app/Index';
 
 import { HomeContainer, CardContainer, HomeCard, HomeContent } from './Style';
+import Loading from '../../components/Loading';
 
 const Home = () => {
   const [baseValue, setBaseValue] = useState({});
@@ -59,6 +60,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const TIME = 1000;
     const appToken = Object.keys(localStorage)
       .some((key) => key === 'crypto-index-api-token');
 
@@ -66,7 +68,7 @@ const Home = () => {
       navigate('/login');
     }
 
-    (async () => {
+    setTimeout(async () => {
       const token = localStorage.getItem('crypto-index-api-token');
       const localQuotes = await getQuotes(token);
 
@@ -81,7 +83,7 @@ const Home = () => {
       };
 
       setBaseValue(currencies);
-    })();
+    }, TIME);
   }, [navigate]);
 
   useEffect(() => {
@@ -155,7 +157,7 @@ const Home = () => {
               </CardContainer>
             </HomeContent>
           ) : (
-            <div data-testid="loading">Loading...</div>
+            <Loading />
           )
       }
     </HomeContainer>

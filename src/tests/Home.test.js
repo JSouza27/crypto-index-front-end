@@ -5,6 +5,7 @@ import axios from 'axios';
 import App from '../App';
 import renderWithRouter from '../helpers/renderWithRouter';
 import currencies from '../helpers/bpi.json';
+import 'jest-canvas-mock';
 import '@testing-library/jest-dom';
 
 jest.mock('axios');
@@ -20,7 +21,7 @@ const STORAGE_KEY = 'crypto-index-api-token';
 
 describe('Testando página home', () => {
   describe('A página deve conter um card "BTC"', () => {
-    const LOADING = 'Loading...';
+    const LOADING = /loading/i;
 
     beforeEach(() => {
       localStorage.setItem(STORAGE_KEY, 'cc69f7d69921e3b5');
