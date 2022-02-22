@@ -12,9 +12,10 @@ const Container = styled.div`
   width: 100vw;
 
   & > div:nth-child(1) {
-    left: 45px;
+    left: 20px;
     position: absolute;
-    top: 45px;
+    top: 20px;
+    width: 100%;
 
     & > button {
       background-color: #fff;
