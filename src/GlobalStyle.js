@@ -9,6 +9,8 @@ const GlobalStyle = createGlobalStyle`
     background-color: #E9FCE9;
     color: #4D625F;
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
   }
 `;
 
