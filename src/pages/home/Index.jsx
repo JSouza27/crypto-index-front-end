@@ -7,13 +7,7 @@ import { getQuotes } from '../../services/app/Index';
 import { HomeContainer, CardContainer, HomeCard, HomeContent } from './Style';
 
 const Home = () => {
-  const [baseValue, setBaseValue] = useState({
-    BRL: parseFloat(0),
-    BTC: parseFloat(0),
-    CAD: parseFloat(0),
-    EUR: parseFloat(0),
-    USD: parseFloat(0),
-  });
+  const [baseValue, setBaseValue] = useState({});
 
   const [btc, setBtc] = useState('');
   const [brl, setBrl] = useState('');
@@ -42,17 +36,26 @@ const Home = () => {
   };
 
   const handleChange = (e) => {
+    e.preventDefault();
     const { value } = e.target;
 
     if (value === '') {
-      calculate(1);
-      setBtc(1);
+      calculate(0);
+      setBtc(0);
     }
 
     if (value !== '') {
       calculate(value);
       setBtc(value);
     }
+  };
+
+  const updateCurrencies = (baseState) => {
+    setBrl(baseState.BRL);
+    setBtc(baseState.BTC);
+    setCad(baseState.CAD);
+    setEur(baseState.EUR);
+    setUsd(baseState.USD);
   };
 
   useEffect(() => {
@@ -63,7 +66,7 @@ const Home = () => {
       navigate('/login');
     }
 
-    const quotes = async () => {
+    (async () => {
       const token = localStorage.getItem('crypto-index-api-token');
       const localQuotes = await getQuotes(token);
 
@@ -77,80 +80,84 @@ const Home = () => {
         USD: convertCurrency(USD.rate_float),
       };
 
-      setBrl(currencies.BRL);
-      setBtc(currencies.BTC);
-      setCad(currencies.CAD);
-      setEur(currencies.EUR);
-      setUsd(currencies.USD);
-
       setBaseValue(currencies);
-    };
-
-    quotes();
+    })();
   }, [navigate]);
+
+  useEffect(() => {
+    updateCurrencies(baseValue);
+  }, [baseValue]);
 
   return (
     <HomeContainer>
-      <HomeContent>
-        <div>
-          <button type="button" onClick={ () => navigate('/update-quote') }>
-            Atualizar valor monetário
-          </button>
-        </div>
-        <HomeCard>
-          <div>
-            <FaBitcoin size={ 35 } color="#f7931a" />
-            <span>BTC</span>
-            <span>BITCOIN</span>
-          </div>
-          <input
-            type="number"
-            name="btc"
-            id="btc"
-            value={ btc }
-            min={ 1 }
-            onChange={ (e) => handleChange(e) }
-          />
-        </HomeCard>
+      {
+        Object.keys(baseValue).length
+          ? (
+            <HomeContent>
+              <div>
+                <button type="button" onClick={ () => navigate('/update-quote') }>
+                  Atualizar valor monetário
+                </button>
+              </div>
+              <HomeCard>
+                <div>
+                  <FaBitcoin size={ 35 } color="#f7931a" />
+                  <span>BTC</span>
+                  <span>BITCOIN</span>
+                </div>
+                <input
+                  data-testid="btc-input"
+                  type="number"
+                  name="btc"
+                  id="btc"
+                  value={ btc }
+                  min={ 0 }
+                  onChange={ (e) => handleChange(e) }
+                />
+              </HomeCard>
 
-        <CardContainer>
-          <HomeCard>
-            <div>
-              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
-              <span>USD</span>
-              <span>DOLLAR</span>
-            </div>
-            <span>{ usd }</span>
-          </HomeCard>
+              <CardContainer>
+                <HomeCard>
+                  <div>
+                    <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
+                    <span>USD</span>
+                    <span>DOLLAR</span>
+                  </div>
+                  <span data-testid="usd-value">{ usd }</span>
+                </HomeCard>
 
-          <HomeCard>
-            <div>
-              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
-              <span>BRL</span>
-              <span>REAL</span>
-            </div>
-            <span>{ brl }</span>
-          </HomeCard>
+                <HomeCard>
+                  <div>
+                    <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
+                    <span>BRL</span>
+                    <span>REAL</span>
+                  </div>
+                  <span data-testid="brl-value">{ brl }</span>
+                </HomeCard>
 
-          <HomeCard>
-            <div>
-              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
-              <span>EUR</span>
-              <span>EURO</span>
-            </div>
-            <span>{ eur }</span>
-          </HomeCard>
+                <HomeCard>
+                  <div>
+                    <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
+                    <span>EUR</span>
+                    <span>EURO</span>
+                  </div>
+                  <span data-testid="eur-value">{ eur }</span>
+                </HomeCard>
 
-          <HomeCard>
-            <div>
-              <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
-              <span>CAD</span>
-              <span>DOLLAR CANADENSE</span>
-            </div>
-            <span>{ cad }</span>
-          </HomeCard>
-        </CardContainer>
-      </HomeContent>
+                <HomeCard>
+                  <div>
+                    <RiMoneyDollarCircleFill size={ 35 } color="#0b5ba1" />
+                    <span>CAD</span>
+                    <span>DOLLAR CANADENSE</span>
+                  </div>
+                  <span data-testid="cad-value">{ cad }</span>
+                </HomeCard>
+              </CardContainer>
+            </HomeContent>
+          ) : (
+            <div data-testid="loading">Loading...</div>
+          )
+      }
     </HomeContainer>
   );
 };

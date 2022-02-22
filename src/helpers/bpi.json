@@ -1,0 +1,32 @@
+{
+  "USD": {
+    "code": "USD",
+    "rate": "37,678.6301",
+    "description": "United States Dollar",
+    "rate_float": "37678.63"
+  },
+  "BTC": {
+    "code": "BTC",
+    "rate": "1.0000",
+    "description": "Bitcoin",
+    "rate_float": "1"
+  },
+  "BRL": {
+    "code": "BRL",
+    "rate": "376,786.301",
+    "description": "Brazilian Real",
+    "rate_float": "376786.30"
+  },
+  "EUR": {
+    "code": "EUR",
+    "rate": "34,664.34",
+    "description": "Euro",
+    "rate_float": "34664.33"
+  },
+  "CAD": {
+    "code": "CAD",
+    "rate": "54,257.227",
+    "description": "Canadian Dollar",
+    "rate_float": "54257.22"
+  }
+}

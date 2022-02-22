@@ -18,7 +18,7 @@ const Login = () => {
     const STATUS_CODE_OK = 200;
 
     const { status, data } = await getLogin({ email, password });
-    console.log({ status, data });
+
     if (status !== STATUS_CODE_OK) {
       toast.error(data.message);
     } else {

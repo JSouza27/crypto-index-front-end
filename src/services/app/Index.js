@@ -9,15 +9,19 @@ const getQuotes = async (token) => {
 
     return response;
   } catch (error) {
-    console.log(error.response);
+    console.log({ quotes: error.response });
   }
 };
 
 const getCurrencies = async (token) => {
-  const headers = { headers: { authorization: token } };
-  const response = await axios.get(`${api}/currencies`, headers);
+  try {
+    const headers = { headers: { authorization: token } };
+    const response = await axios.get(`${api}/currencies`, headers);
 
-  return response.data;
+    return response;
+  } catch (error) {
+    console.log({ currencies: error.response });
+  }
 };
 
 const sendUpdate = async (token, quote) => {

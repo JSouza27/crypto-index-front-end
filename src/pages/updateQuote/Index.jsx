@@ -50,14 +50,14 @@ const UpdateQuote = () => {
 
     const currencies = async () => {
       const getToken = localStorage.getItem('crypto-index-api-token');
-      const localCurrencies = await getCurrencies(token);
+      const { data } = await getCurrencies(token);
 
-      const keys = Object.keys(localCurrencies);
+      const keys = Object.keys(data);
 
       const convertedCurrencies = keys.reduce((acc, cur) => {
         const obj = {
           currency: cur,
-          value: parseFloat(localCurrencies[cur]).toFixed(2),
+          value: parseFloat(data[cur]).toFixed(2),
         };
 
         acc.push(obj);
