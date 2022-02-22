@@ -51,6 +51,7 @@ const HomeCard = styled.div`
   justify-content: center;
   min-height: 7rem;
   margin: 0.5rem;
+  overflow: hidden;
   width: 13.43rem;
 
   & > div {
