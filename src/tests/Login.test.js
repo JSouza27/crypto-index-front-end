@@ -7,7 +7,6 @@ import renderWithRouter from '../helpers/renderWithRouter';
 import '@testing-library/jest-dom';
 
 jest.mock('axios');
-const mockedAxios = axios;
 
 const EMAIL_ID = 'email-input';
 const PASSWORD_ID = 'password-input';
@@ -75,7 +74,7 @@ describe('Testando página de login', () => {
           message: 'Campos inválidos',
         };
 
-        mockedAxios.post.mockReturnValue(response);
+        axios.post.mockReturnValue(response);
 
         renderWithRouter(<App />, { route: '/login' });
 
@@ -138,8 +137,8 @@ describe('Testando página de login', () => {
           status: 200,
         };
 
-        mockedAxios.post.mockReturnValue(response);
-        mockedAxios.get.mockReturnValue(responseHome);
+        axios.post.mockReturnValue(response);
+        axios.get.mockReturnValue(responseHome);
 
         renderWithRouter(<App />, { route: '/login' });
 

@@ -8,7 +8,6 @@ import currencies from '../helpers/bpi.json';
 import '@testing-library/jest-dom';
 
 jest.mock('axios');
-const mockedAxios = axios;
 
 const quotes = {
   data: {
@@ -25,7 +24,7 @@ describe('Testando página home', () => {
 
     beforeEach(() => {
       localStorage.setItem(STORAGE_KEY, 'cc69f7d69921e3b5');
-      mockedAxios.get.mockReturnValue(quotes);
+      axios.get.mockReturnValue(quotes);
     });
 
     afterEach(() => jest.clearAllMocks());
@@ -172,34 +171,4 @@ describe('Testanto o redirencionamento de página', () => {
       expect(emailText).toBeInTheDocument();
     });
   });
-
-  beforeEach(() => {
-    mockedAxios.get.mockReturnValue(quotes);
-  });
-
-  // describe('Verifica se a página é redirencionada ao clicar no botão "Atualizar valor"',
-  //   () => {
-  //     const LOADING = 'Loading...';
-
-  //     beforeEach(async () => {
-  //       localStorage.setItem('crypto-index-api-token', 'cc69f7d69921e3b5');
-  //       await mockedAxios.get.mockReturnValue(quotes);
-  //     });
-
-  //     it('Ao clicar no botão deve ser redirencionado para "/update-quote"', async () => {
-  //       renderWithRouter(<App />, { route: '/' });
-
-  //       await waitForElementToBeRemoved(
-  //         screen.queryByText(LOADING),
-  //       );
-
-  //       const button = screen.getByRole('button');
-
-  //       expect(button).toBeInTheDocument();
-
-  //       // useEvent.click(button);
-
-  //       expect().toEqual('/update-quote');
-  //     });
-  //   });
 });
