@@ -25,6 +25,18 @@ acesse esse link: [Crypto Index](https://crypto-index-front-end.vercel.app/login
 
 ## Screenshot
 
+<div>
+  <img width="75%" src="src/assets/crypto-index-front-end.vercel.app-Medium-Screen-1024x768.png">
+  <img width="75%" src="src/assets/crypto-index-front-end.vercel.app-Medium-Screen-1024x768 (1).png">
+  <img width="75%" src="src/assets/crypto-index-front-end.vercel.app-Medium-Screen-1024x768 (2).png">
+</div>
+
+
+<div>
+  <img heigth="10%" src="src/assets/crypto-index-front-end.vercel.app-Pixel-3-3-XL-393x786.png">
+  <img heigth="10%" src="src/assets/crypto-index-front-end.vercel.app-Pixel-3-3-XL-393x786 (1).png">
+  <img heigth="10%" src="src/assets/crypto-index-front-end.vercel.app-Pixel-3-3-XL-393x786 (2).png">
+</div>
 
 
 ## Funcionalidades
